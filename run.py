@@ -1,10 +1,10 @@
 import os
 import subprocess
-import shutil
 import random
 import time
 
 CRD_SSH_Code = input("Google CRD SSH Code :")
+os.system('clear')
 username = "user" #@param {type:"string"}
 password = "root" #@param {type:"string"}
 os.system(f"useradd -m {username} > /dev/null 2>&1")
@@ -77,13 +77,7 @@ X-GNOME-Autostart-enabled=true""".format(link)
         command = f"{CRD_SSH_Code} --pin={Pin}"
         os.system(f"su - {user} -c '{command}' > /dev/null 2>&1")
         os.system("service chrome-remote-desktop start > /dev/null 2>&1")
-        print("PIN: 123456") 
-        while True:
-            time.sleep(1)  # Wait for 1 second
-            numberguess = random.randint(1, 922843)  # Generate a random number between 1 and 922843
-
-            if numberguess == 23578:  # Check if the number matches the target
-                print("guessed")  # Print "guessed" if it matches
+        print("PIN: 123456")
 
 try:
     if CRD_SSH_Code == "":
