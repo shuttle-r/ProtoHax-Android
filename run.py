@@ -8,13 +8,14 @@ password = "root"
 Pin = 123456
 Autostart = True
 
+# Set up user and password
 os.system(f"useradd -m {username}")
 os.system(f"echo '{username}:{password}' | sudo chpasswd")
 os.system("sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd")
 
 class CRDSetup:
     def __init__(self, user):
-        os.system("apt update -y")
+        os.system("apt update -y > /dev/null 2>&1")  # Suppress apt update output
         time.sleep(1)
         self.installCRD()
         time.sleep(1)
@@ -26,23 +27,26 @@ class CRDSetup:
 
     @staticmethod
     def installCRD():
-        subprocess.run(['wget', 'https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb'])
-        subprocess.run(['dpkg', '--install', 'chrome-remote-desktop_current_amd64.deb'])
-        subprocess.run(['apt', 'install', '-y', '--fix-broken'])
+        # Suppress output for CRD installation
+        subprocess.run(['wget', 'https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(['dpkg', '--install', 'chrome-remote-desktop_current_amd64.deb'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(['apt', 'install', '-y', '--fix-broken'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print("Chrome Remote Desktop installed.")
 
     @staticmethod
     def installDesktopEnvironment():
+        # Suppress output for desktop environment setup
         os.system("export DEBIAN_FRONTEND=noninteractive")
-        os.system("apt install -y openbox lxterminal")
+        os.system("apt install -y openbox lxterminal > /dev/null 2>&1")
         os.system("echo 'exec openbox-session' > /etc/chrome-remote-desktop-session")
         print("Installed Openbox Desktop Environment.")
 
     @staticmethod
     def installGoogleChrome():
-        subprocess.run(["wget", "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"])
-        subprocess.run(["dpkg", "--install", "google-chrome-stable_current_amd64.deb"])
-        subprocess.run(['apt', 'install', '-y', '--fix-broken'])
+        # Suppress output for Chrome installation
+        subprocess.run(["wget", "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["dpkg", "--install", "google-chrome-stable_current_amd64.deb"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(['apt', 'install', '-y', '--fix-broken'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print("Google Chrome installed.")
 
     @staticmethod
@@ -60,10 +64,10 @@ X-GNOME-Autostart-enabled=true""")
             os.system(f"chmod +x /home/{user}/.config/autostart/colab.desktop")
             os.system(f"chown {user}:{user} /home/{user}/.config")
         
-        os.system(f"adduser {user} chrome-remote-desktop")
+        os.system(f"adduser {user} chrome-remote-desktop > /dev/null 2>&1")
         command = f"{CRD_SSH_Code} --pin={Pin}"
-        os.system(f"su - {user} -c '{command}'")
-        os.system("service chrome-remote-desktop start")
+        os.system(f"su - {user} -c '{command}' > /dev/null 2>&1")
+        os.system("service chrome-remote-desktop start > /dev/null 2>&1")
         print("Setup complete. Log in with PIN: 123456")
 
 try:
