@@ -7,10 +7,10 @@ import time
 CRD_SSH_Code = input("Google CRD SSH Code :")
 username = "user" #@param {type:"string"}
 password = "root" #@param {type:"string"}
-os.system(f"useradd -m {username}")
-os.system(f"adduser {username} sudo")
-os.system(f"echo '{username}:{password}' | sudo chpasswd")
-os.system("sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd")
+os.system(f"useradd -m {username} > /dev/null 2>&1")
+os.system(f"adduser {username} sudo > /dev/null 2>&1")
+os.system(f"echo '{username}:{password}' | sudo chpasswd > /dev/null 2>&1")
+os.system("sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd > /dev/null 2>&1")
 
 Pin = 123456 #@param {type: "integer"}
 Autostart = True #@param {type: "boolean"}
