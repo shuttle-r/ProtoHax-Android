@@ -5,6 +5,7 @@ import time
 
 CRD_SSH_Code = input("Google CRD SSH Code :")
 os.system('clear')
+print("Alr")
 username = "user" #@param {type:"string"}
 password = "root" #@param {type:"string"}
 os.system(f"useradd -m {username} > /dev/null 2>&1")
