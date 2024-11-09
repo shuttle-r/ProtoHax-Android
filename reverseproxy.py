@@ -1,4 +1,4 @@
-!pip install aiohttp pyngrok
+pip install aiohttp pyngrok
 
 import os
 import asyncio
