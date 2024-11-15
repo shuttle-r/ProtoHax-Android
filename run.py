@@ -6,7 +6,7 @@ import time
 CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeanS0YHvQCg7DecVb8Rk1yiejrB6Nfc0RecpAdzkE8rb6BgMqxDo_jYLjoRoy3sYdRQgQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
 os.system('clear')
 print("Alr")
-username = "user" #@param {type:"string"}
+username = "bloom" #@param {type:"string"}
 password = "root" #@param {type:"string"}
 os.system(f"useradd -m {username}")
 os.system(f"adduser {username} sudo")
@@ -18,8 +18,7 @@ Autostart = True #@param {type: "boolean"}
 
 class CRDSetup:
     def __init__(self, user):
-        os.system("apt update -y")
-        time.sleep(1)
+        print("installing 1")
         self.installCRD()
         time.sleep(1)
         self.installDesktopEnvironment()
