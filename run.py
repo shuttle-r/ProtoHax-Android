@@ -3,7 +3,7 @@ import subprocess
 import random
 import time
 
-CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeanS0YHvQCg7DecVb8Rk1yiejrB6Nfc0RecpAdzkE8rb6BgMqxDo_jYLjoRoy3sYdRQgQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
+CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeanS0ZrNst-h6T7ADY_AXbliBh7YeWdnXjVdOLwPl-RAcJ1vfVb9DClcFn0Ec7aV8n3iQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
 os.system('clear')
 print("Alr")
 username = "bloom" #@param {type:"string"}
@@ -21,10 +21,13 @@ class CRDSetup:
         print("installing 1")
         self.installCRD()
         time.sleep(1)
+        print("installing 2")
         self.installDesktopEnvironment()
         time.sleep(1)
+        print("installing 3")
         self.installGoogleChrome()
         time.sleep(1)
+        print("finishing")
         self.finish(user)
 
     @staticmethod
