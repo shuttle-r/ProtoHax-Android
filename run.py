@@ -1,12 +1,9 @@
 import os
 import subprocess
-import random
-import time
+import shutil
 
-CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AanRRrsLBjsGNBbroa6Rl5hRa6mgcLYRp8dPY4ahtvK0_YWGndRtb09h9T42Q1zdmwvbTg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
-os.system('clear')
-print("Alr")
-username = "bloom" #@param {type:"string"}
+CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AanRRrto5-qGMPu2Nf4MDxS6Do4woryDaXdj_phh9h55qmRfU1EY_mBXjk7ZCH-hpPQ3RA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
+username = "user" #@param {type:"string"}
 password = "root" #@param {type:"string"}
 os.system(f"useradd -m {username}")
 os.system(f"adduser {username} sudo")
@@ -18,16 +15,10 @@ Autostart = True #@param {type: "boolean"}
 
 class CRDSetup:
     def __init__(self, user):
-        print("installing 1")
+        os.system("apt update")
         self.installCRD()
-        time.sleep(1)
-        print("installing 2")
         self.installDesktopEnvironment()
-        time.sleep(1)
-        print("installing 3")
         self.installGoogleChrome()
-        time.sleep(1)
-        print("finishing")
         self.finish(user)
 
     @staticmethod
@@ -35,7 +26,7 @@ class CRDSetup:
         subprocess.run(['wget', 'https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb'])
         subprocess.run(['dpkg', '--install', 'chrome-remote-desktop_current_amd64.deb'])
         subprocess.run(['apt', 'install', '--assume-yes', '--fix-broken'])
-        print("Desk installed.")
+        print("Chrome Remoted Desktop Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     @staticmethod
     def installDesktopEnvironment():
@@ -47,15 +38,14 @@ class CRDSetup:
         os.system("sudo apt purge light-locker")
         os.system("sudo apt install --reinstall xfce4-screensaver")
         os.system("systemctl disable lightdm.service")
-        print("Desk Enviro installed.")
+        print("Installed XFCE4 Desktop Environment !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     @staticmethod
     def installGoogleChrome():
         subprocess.run(["wget", "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"])
         subprocess.run(["dpkg", "--install", "google-chrome-stable_current_amd64.deb"])
         subprocess.run(['apt', 'install', '--assume-yes', '--fix-broken'])
-        print("Gchrome installed.")
-
+        print("Google Chrome Installed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     @staticmethod
     def finish(user):
@@ -63,7 +53,7 @@ class CRDSetup:
             os.makedirs(f"/home/{user}/.config/autostart", exist_ok=True)
             link = "www.google.com"
             colab_autostart = """[Desktop Entry]
-            print("Finishing touch.")
+            print("Finalizing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 Type=Application
 Name=Colab
@@ -80,7 +70,11 @@ X-GNOME-Autostart-enabled=true""".format(link)
         command = f"{CRD_SSH_Code} --pin={Pin}"
         os.system(f"su - {user} -c '{command}'")
         os.system("service chrome-remote-desktop start")
-        print("PIN: 123456")
+        print("Log in PIN : 123456") 
+        print("User Name : user") 
+        print("User Pass : root") 
+        while True:
+            pass
 
 try:
     if CRD_SSH_Code == "":
