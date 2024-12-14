@@ -3,7 +3,7 @@ import subprocess
 import random
 import time
 
-CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AeanS0ZrNst-h6T7ADY_AXbliBh7YeWdnXjVdOLwPl-RAcJ1vfVb9DClcFn0Ec7aV8n3iQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
+CRD_SSH_Code = 'DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AanRRrsLBjsGNBbroa6Rl5hRa6mgcLYRp8dPY4ahtvK0_YWGndRtb09h9T42Q1zdmwvbTg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)'
 os.system('clear')
 print("Alr")
 username = "bloom" #@param {type:"string"}
